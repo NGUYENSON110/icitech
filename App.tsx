@@ -18,7 +18,7 @@ interface TabBarIconProps {
 }
 function SignInScreen() {
   return (
-    <View style={{ flex: 1, justifyContent: 'center', alignItems: 'center'}}>
+    <View style={{ flex: 1, justifyContent: 'center', alignItems: 'center' }}>
       <Text>SignInScreen!</Text>
     </View>
   );
@@ -60,7 +60,7 @@ function ContactsScreen() {
 }
 function CrmScreen() {
   return (
-    <View style={{ flex: 1, justifyContent: 'center', alignItems: 'center'}}>
+    <View style={{ flex: 1, justifyContent: 'center', alignItems: 'center' }}>
       <Text>CRM!</Text>
     </View>
   );
@@ -74,7 +74,7 @@ function TimeclockScreen() {
 }
 function InvoiceScreen() {
   return (
-    <View style={{ flex: 1, justifyContent: 'center', alignItems:'center' }}>
+    <View style={{ flex: 1, justifyContent: 'center', alignItems: 'center' }}>
       <Text>Invoice!</Text>
     </View>
   );
@@ -106,17 +106,17 @@ const StackNavigation = () => {
       <Stack.Screen
         name="LOGIN"
         component={SignInScreen}
-        options={{headerShown: false}}
+        options={{ headerShown: false }}
       />
       <Stack.Screen
         name="SIGNUP"
         component={SignUpScreen}
-        options={{headerShown: false}}
+        options={{ headerShown: false }}
       />
       <Stack.Screen
         name="HOME"
         component={TabNavigator}
-        options={{headerShown: false}}
+        options={{ headerShown: false }}
       />
     </Stack.Navigator>
   );
@@ -149,6 +149,7 @@ const TabNavigator = () => {
           right: 10,
           elevation: 0,
           shadowOpacity: 0,
+          justifyContent:'center',
         },
         tabBarLabelStyle: {
           fontSize: 12,
@@ -162,6 +163,7 @@ const TabNavigator = () => {
         options={{
           headerShown: false,
           tabBarIcon: ({ focused }) => (
+            
             <TabBarIcon
               focus={focused}
               source={require('./src/iconHome.png')}
@@ -197,7 +199,7 @@ const TabNavigator = () => {
       />
       <Tab.Screen
         name="More"
-        component={() => null}
+        component={DrawerNavigator}
         options={{
           headerShown: false,
           tabBarIcon: ({ focused }) => (
@@ -207,22 +209,159 @@ const TabNavigator = () => {
             />
           ),
         }}
-        listeners={({ navigation }) => ({
-          tabPress: e => {
-            e.preventDefault();
-            Alert.alert('123')
-            // navigation.dispatch(DrawerActions.openDrawer());
-          },
-        })}
+      // listeners={({ navigation }) => ({
+      //   tabPress: e => {
+      //     e.preventDefault();
+      //     // Alert.alert('123')
+      //     navigation.dispatch(DrawerActions.openDrawer());
+
+      //   },
+      // })}
       />
     </Tab.Navigator>
   )
 };
 const DrawerNavigator = () => {
   return (
-    <Drawer.Navigator>
-     <Drawer.Screen name="Contacts" component={ContactsScreen} />
+
+    <Drawer.Navigator
+      initialRouteName="HOME"
+      drawerContent={props => {
+        const { routeNames, index } = props.state;
+        const focused = routeNames[index];
+        console.log('focused', focused);
+
+        return (
+          <DrawerContentScrollView {...props}>
+            <View style={{ marginTop: 12, marginLeft: 24 }}>
+              <Image source={require('./src/Logo.png')} style={{ height: 56, width: 56 }} />
+              <View
+                style={{
+                  borderWidth: 1,
+                  borderColor: '#E5EAEF',
+                  marginTop: 10,
+                }}>
+              </View>
+            </View>
+            <DrawerItem
+              label={'Home'}
+              icon={() => <Image source={require('./src/home.png')} style={{ height: 24, width: 24 }} />}
+              onPress={() => {
+                Alert.alert('123')
+              }}
+            // focused={focused === SCREENS.PROFILE}
+            // activeBackgroundColor={COLORS.ORANGE}
+            // inactiveBackgroundColor={COLORS.GRAY_LIGHT}
+            // inactiveTintColor={COLORS.BLACK}
+            // activeTintColor={COLORS.WHITE}
+            />
+            <DrawerItem
+              label={'Job Management'}
+              icon={() => <Image source={require('./src/jobs.png')} style={{ height: 24, width: 24 }} />}
+              onPress={() => {
+                Alert.alert('123')
+              }}
+            // focused={focused === SCREENS.ABOUT}
+            // activeBackgroundColor={COLORS.ORANGE}
+            // inactiveBackgroundColor={COLORS.GRAY_LIGHT}
+            // inactiveTintColor={COLORS.BLACK}
+            // activeTintColor={COLORS.WHITE}
+            />
+            <DrawerItem
+              label={'Schedule'}
+              icon={() => <Image source={require('./src/schedule.png')} style={{ height: 24, width: 24 }} />}
+              onPress={() => {
+                Alert.alert('123')
+              }}
+            // focused={focused === SCREENS.ABOUT}
+            // activeBackgroundColor={COLORS.ORANGE}
+            // inactiveBackgroundColor={COLORS.GRAY_LIGHT}
+            // inactiveTintColor={COLORS.BLACK}
+            // activeTintColor={COLORS.WHITE}
+            />
+            <DrawerItem
+              label={'Contacts'}
+              icon={() => <Image source={require('./src/contacts.png')} style={{ height: 24, width: 24 }} />}
+              onPress={() => {
+                Alert.alert('123')
+              }}
+            // focused={focused === SCREENS.ABOUT}
+            // activeBackgroundColor={COLORS.ORANGE}
+            // inactiveBackgroundColor={COLORS.GRAY_LIGHT}
+            // inactiveTintColor={COLORS.BLACK}
+            // activeTintColor={COLORS.WHITE}
+            />
+            <DrawerItem
+              label={'CRM'}
+              icon={() => <Image source={require('./src/crm.png')} style={{ height: 24, width: 24 }} />}
+              onPress={() => {
+                Alert.alert('123')
+              }}
+            // focused={focused === SCREENS.ABOUT}
+            // activeBackgroundColor={COLORS.ORANGE}
+            // inactiveBackgroundColor={COLORS.GRAY_LIGHT}
+            // inactiveTintColor={COLORS.BLACK}
+            // activeTintColor={COLORS.WHITE}
+            />
+            <DrawerItem
+              label={'Timeclock'}
+              icon={() => <Image source={require('./src/timeclock.png')} style={{ height: 24, width: 24 }} />}
+              onPress={() => {
+                Alert.alert('123')
+              }}
+            // focused={focused === SCREENS.ABOUT}
+            // activeBackgroundColor={COLORS.ORANGE}
+            // inactiveBackgroundColor={COLORS.GRAY_LIGHT}
+            // inactiveTintColor={COLORS.BLACK}
+            // activeTintColor={COLORS.WHITE}
+            />
+            <DrawerItem
+              label={'Invoice'}
+              icon={() => <Image source={require('./src/invoice.png')} style={{ height: 24, width: 24 }} />}
+              onPress={() => {
+                Alert.alert('123')
+              }}
+            // focused={focused === SCREENS.ABOUT}
+            // activeBackgroundColor={COLORS.ORANGE}
+            // inactiveBackgroundColor={COLORS.GRAY_LIGHT}
+            // inactiveTintColor={COLORS.BLACK}
+            // activeTintColor={COLORS.WHITE}
+            />
+            <DrawerItem
+              label={'Estimates'}
+              icon={() => <Image source={require('./src/estimates.png')} style={{ height: 24, width: 24 }} />}
+              onPress={() => {
+                Alert.alert('123')
+              }}
+            // focused={focused === SCREENS.ABOUT}
+            // activeBackgroundColor={COLORS.ORANGE}
+            // inactiveBackgroundColor={COLORS.GRAY_LIGHT}
+            // inactiveTintColor={COLORS.BLACK}
+            // activeTintColor={COLORS.WHITE}
+            />
+            <DrawerItem
+              label={'Reports'}
+              icon={() => <Image source={require('./src/reports.png')} style={{ height: 24, width: 24 }} />}
+              onPress={() => {
+                Alert.alert('123')
+              }}
+            // focused={focused === SCREENS.ABOUT}
+            // activeBackgroundColor={COLORS.ORANGE}
+            // inactiveBackgroundColor={COLORS.GRAY_LIGHT}
+            // inactiveTintColor={COLORS.BLACK}
+            // activeTintColor={COLORS.WHITE}
+            />
+
+
+
+          </DrawerContentScrollView>
+        );
+      }}>
+      <Drawer.Screen name="Home" component={HomeScreen} />
     </Drawer.Navigator>
+    // <Drawer.Navigator initialRouteName="Contacts">
+
+    // </Drawer.Navigator>
   );
 }
 export default function App() {
